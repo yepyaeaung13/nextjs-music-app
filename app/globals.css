@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.top-ten-songs-list,
+.trending-songs-list,
+.artist-songs,
+.all-songs {
+  counter-reset: count 0;
+}
+
+.top-ten-song,
+.trending-song,
+.artist-song,
+.all-song {
+  counter-increment: count 1;
+}
+
+.top-ten-song::before,
+.trending-song::before,
+.artist-song::before,
+.all-song::before {
+  content: counter(count)".";
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22c55e;
+}
+
+::-webkit-scrollbar-track {
+  background: #4A5C6A;
+} */
+
+.scrollbar {
+  scrollbar-width: none;
+  scrollbar-color: #22c55e #4A5C6A;
+}
