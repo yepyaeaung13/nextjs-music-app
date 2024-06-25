@@ -13,7 +13,8 @@ const NavSlibar = () => {
     if (localValue == null) {
       return null;
     }
-    return JSON.parse(localValue);
+    const jsonData = JSON.parse(localValue);
+    return jsonData[0];
   });
 
   useEffect(() => {
