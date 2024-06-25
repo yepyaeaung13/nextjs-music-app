@@ -23,21 +23,19 @@ const Login = ({ userAuth, setUserAuth }) => {
       .then((json) => {
         localStorage.setItem("AUTH", JSON.stringify(json));
         setUserAuth(json);
-      })
-      .catch((err) => console.error(err));
+      });
   };
   const loginWithGoogle = async () => {
-    await signInWithPopup(firebaseAuth, provider)
-      .then((userCred) => {
-        loginHandler(userCred.user);
-      })
-      .catch((err) => console.error(err));
+    await signInWithPopup(firebaseAuth, provider).then((userCred) => {
+      loginHandler(userCred.user);
+    });
   };
   return (
-    <button
+    <Link
       className={`hover:bg-secondary mt-10 rounded-md p-1 duration-200 items-start gap-2 ${
         userAuth == null ? "flex" : "hidden"
       }`}
+      href={"/"}
       onClick={loginWithGoogle}
     >
       <svg
@@ -55,7 +53,7 @@ const Login = ({ userAuth, setUserAuth }) => {
         />
       </svg>
       <span>Login</span>
-    </button>
+    </Link>
   );
 };
 
