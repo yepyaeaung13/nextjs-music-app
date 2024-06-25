@@ -13,8 +13,7 @@ const NavSlibar = () => {
     if (localValue == null) {
       return null;
     } else {
-      const jsonData = JSON.parse(localValue);
-      return jsonData[0];
+      return JSON.parse(localValue);
     }
   });
 
