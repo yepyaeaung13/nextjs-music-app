@@ -21,8 +21,8 @@ const Login = ({ userAuth, setUserAuth }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        localStorage.setItem("AUTH", JSON.stringify(json));
-        setUserAuth(json);
+        localStorage.setItem("AUTH", JSON.stringify(json[0]));
+        setUserAuth(json[0]);
       });
   };
   const loginWithGoogle = async () => {
