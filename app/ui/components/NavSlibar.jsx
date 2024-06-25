@@ -12,9 +12,10 @@ const NavSlibar = () => {
     const localValue = localStorage.getItem("AUTH");
     if (localValue == null) {
       return null;
+    } else {
+      const jsonData = JSON.parse(localValue);
+      return jsonData[0];
     }
-    const jsonData = JSON.parse(localValue);
-    return jsonData[0];
   });
 
   useEffect(() => {
