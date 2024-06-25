@@ -1,15 +1,16 @@
-"use client";
 import React from "react";
+import { fetchPlayListSongs } from "../api/lib/data";
 import dynamic from "next/dynamic";
 
 const PlayList = dynamic(() => import("../ui/components/PlayList"), {
   ssr: false,
 });
 
-const page = () => {
+const page = async () => {
+  const playListSongs = await fetchPlayListSongs();
   return (
     <div>
-      <PlayList />
+      <PlayList playListSongs={playListSongs} />
     </div>
   );
 };

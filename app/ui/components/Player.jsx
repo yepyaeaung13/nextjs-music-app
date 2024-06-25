@@ -6,25 +6,26 @@ import {
   togglePause,
 } from "@/lib/features/player/playerSlice";
 import { getDownloadURL, ref } from "firebase/storage";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Player = () => {
   const [loop, setLoop] = useState(false);
-  const [songDurationTag, setSongDurationTag] = useState("");
-  const [songCurrentTimeTag, setSongCurrentTimeTag] = useState("");
-  const [currentProgressTag, setCurrentProgressTag] = useState("");
-  const [audioElement, setAudioElement] = useState("");
+  const audioElement = document.querySelector("#audio");
+  // const [songDurationTag, setSongDurationTag] = useState("");
+  // const [songCurrentTimeTag, setSongCurrentTimeTag] = useState("");
+  // const [currentProgressTag, setCurrentProgressTag] = useState("");
+  // const [audioElement, setAudioElement] = useState("");
   const player = useSelector((state) => state.player);
   const dispatch = useDispatch();
   const loopHandler = () => {
     setLoop(!loop);
   };
 
-  useEffect(() => {
-    const audioElement = document.querySelector("#audio");
-    setAudioElement(audioElement);
-  }, []);
+  // useEffect(() => {
+  //   const audioElement = document.querySelector("#audio");
+  //   setAudioElement(audioElement);
+  // }, []);
 
   const pausedHandler = () => {
     if (player.id !== null) {
@@ -80,33 +81,36 @@ const Player = () => {
   };
 
   let totalSeconds = 0;
-  useEffect(() => {
-    const songDurationTag = document.querySelector(".song-duration");
-    setSongDurationTag(songDurationTag);
-  }, []);
+  // useEffect(() => {
+  //   const songDurationTag = document.querySelector(".song-duration");
+  //   setSongDurationTag(songDurationTag);
+  // }, []);
 
   const durationHandler = (e) => {
+    const songDurationTag = document.querySelector(".song-duration");
     totalSeconds = Math.floor(e.target.duration);
     const songDurationTime = changeText(totalSeconds);
     songDurationTag.innerText = songDurationTime;
   };
 
-  useEffect(() => {
-    const currentProgressTag = document.querySelector(".current-progress");
-    setCurrentProgressTag(currentProgressTag);
-  }, []);
+  // useEffect(() => {
+  //   const currentProgressTag = document.querySelector(".current-progress");
+  //   setCurrentProgressTag(currentProgressTag);
+  // }, []);
 
   const updateProgress = (currentTime) => {
+    const currentProgressTag = document.querySelector(".current-progress");
     const updateWidthPixel = (160 / totalSeconds) * currentTime;
     currentProgressTag.style.width = updateWidthPixel + "px";
   };
 
-  useEffect(() => {
-    const songCurrentTimeTag = document.querySelector(".song-currentTime");
-    setSongCurrentTimeTag(songCurrentTimeTag);
-  }, []);
+  // useEffect(() => {
+  //   const songCurrentTimeTag = document.querySelector(".song-currentTime");
+  //   setSongCurrentTimeTag(songCurrentTimeTag);
+  // }, []);
 
   const currentTimeHandler = (e) => {
+    const songCurrentTimeTag = document.querySelector(".song-currentTime");
     const currentTimeSeconds = Math.floor(e.target.currentTime);
     const songCurrentTime = changeText(currentTimeSeconds);
     songCurrentTimeTag.innerText = songCurrentTime;

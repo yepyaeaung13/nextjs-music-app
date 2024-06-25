@@ -2,50 +2,23 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { app } from "@/lib/config/firebase.config";
+import dynamic from "next/dynamic";
+
+const Login = dynamic(() => import("./Login"), { ssr: false });
 
 const NavSlibar = () => {
   const pathname = usePathname();
-  const firebaseAuth = getAuth(app);
-  const provider = new GoogleAuthProvider();
   const [userAuth, setUserAuth] = useState(() => {
-    const localValue = localStorage.getItem("USER");
+    const localValue = localStorage.getItem("AUTH");
     if (localValue == null) {
       return null;
     }
     return JSON.parse(localValue);
   });
 
-  const loginWithGoogle = async () => {
-    await signInWithPopup(firebaseAuth, provider).then((userCred) => {
-      localStorage.setItem("USER", JSON.stringify(userCred));
-      // fetch(`http://localhost:3000/api/create-users`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     id: userCred.user.uid,
-      //     name: userCred.user.displayName,
-      //     email: userCred.user.email,
-      //     token: userCred.user.to,
-      //   }),
-      // });
-      setUserAuth(userCred);
-    });
-  };
-
   useEffect(() => {
-    window.localStorage.setItem("USER", JSON.stringify(userAuth));
+    window.localStorage.setItem("AUTH", JSON.stringify(userAuth));
   }, [userAuth]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/create-users", {
-      method: "POST",
-      body: JSON.stringify({ uid: "cP7ftunGg2SXhwSqJe6CwKHTHI63" }),
-    }).then((data) => console.log(data));
-  }, []);
 
   const logoutHandler = () => {
     setUserAuth(null);
@@ -126,13 +99,15 @@ const NavSlibar = () => {
           </svg>
           Artists
         </Link>
-        <Link
+        <button
           className={`hover:bg-secondary rounded-md p-1 duration-200 items-center gap-2 ${
             pathname === "/like-songs"
               ? "bg-gradient-to-r from-secondary to-green-800"
               : ""
           } ${userAuth == null ? "hidden" : "flex"}`}
-          href={"/like-songs"}
+          onClick={() => {
+            window.location.pathname = "like-songs";
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -149,14 +124,16 @@ const NavSlibar = () => {
             />
           </svg>
           Like Songs
-        </Link>
-        <Link
+        </button>
+        <button
           className={`hover:bg-secondary rounded-md p-1 duration-200 items-center gap-2  ${
             pathname === "/play-lists"
               ? "bg-gradient-to-r from-secondary to-green-800"
               : ""
           }  ${userAuth == null ? "hidden" : "flex"}`}
-          href={"/play-lists"}
+          onClick={() => {
+            location.pathname = "play-lists";
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -173,13 +150,13 @@ const NavSlibar = () => {
             />
           </svg>
           My Playlists
-        </Link>
+        </button>
         <Link
           className={`hover:bg-secondary mt-10 rounded-md p-1 duration-200 items-start gap-2 ${
             userAuth == null ? "hidden" : "flex"
           }`}
           href={"#"}
-          title={userAuth == null ? "" : userAuth.user.email}
+          title={userAuth == null ? "" : userAuth[0].email}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -196,32 +173,10 @@ const NavSlibar = () => {
             />
           </svg>
           <span className="line-clamp-1 w-2/3">
-            {userAuth == null ? "" : userAuth.user.displayName}
+            {userAuth == null ? "" : userAuth[0].name}
           </span>
         </Link>
-        <Link
-          className={`hover:bg-secondary mt-10 rounded-md p-1 duration-200 items-start gap-2 ${
-            userAuth == null ? "flex" : "hidden"
-          }`}
-          href={"#"}
-          onClick={loginWithGoogle}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 text-green-500"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-            />
-          </svg>
-          <span>Login</span>
-        </Link>
+        <Login userAuth={userAuth} setUserAuth={setUserAuth} />
         <Link
           className={`hover:bg-secondary rounded-md p-1 duration-200 items-center gap-2  ${
             userAuth == null ? "hidden" : "flex"

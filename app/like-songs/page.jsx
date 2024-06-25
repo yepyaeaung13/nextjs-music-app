@@ -1,14 +1,16 @@
 import React from "react";
 import dynamic from "next/dynamic";
+import { fetchLikeSongs } from "../api/lib/data";
 
-const LikeSongs = dynamic(() => import("../ui/components/LikeSongs"), {
+const LikeSongsPage = dynamic(() => import("../ui/components/LikeSongsPage"), {
   ssr: false,
 });
 
-const page = () => {
+const page = async () => {
+  const likeSongs = await fetchLikeSongs();
   return (
     <div>
-      <LikeSongs />
+      <LikeSongsPage likeSongs={likeSongs} />
     </div>
   );
 };

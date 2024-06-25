@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
+import Search from "../ui/components/Search";
 
 export default function page() {
   const [artists, setArtists] = useState([
@@ -28,15 +29,7 @@ export default function page() {
   return (
     <div className="h-[100vh] bg-secondary px-10 py-5">
       <div className="flex justify-center mb-8">
-        <input
-          type="search"
-          autoFocus
-          name=""
-          id=""
-          onKeyUp={searchHandler}
-          placeholder="search by artist's name"
-          className="bg-palette_one border-b border-green-600 rounded-2xl focus:outline-none px-3 h-8 w-96"
-        />
+        <Search searchHandler={searchHandler} />
       </div>
       <div className="grid grid-cols-12 gap-5 h-[75vh] px-6 overflow-y-scroll scrollbar">
         {artistFilter.map((artist) => {
