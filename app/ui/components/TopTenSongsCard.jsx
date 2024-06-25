@@ -25,7 +25,7 @@ const TopTenSongsCard = ({ songs, song, idx }) => {
   };
 
   const likeSongHandler = (song) => {
-    fetch("http://localhost:3000/api/add-like-songs", {
+    fetch("https://nextjs-music-app-w7op.vercel.app/api/add-like-songs", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -34,7 +34,7 @@ const TopTenSongsCard = ({ songs, song, idx }) => {
     });
   };
   const playListSongHandler = (song) => {
-    fetch("http://localhost:3000/api/add-playlist-songs", {
+    fetch("https://nextjs-music-app-w7op.vercel.app/api/add-playlist-songs", {
       method: "POST",
       headers: {
         "content-type": "application/json",
