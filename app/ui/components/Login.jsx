@@ -23,12 +23,15 @@ const Login = ({ userAuth, setUserAuth }) => {
       .then((json) => {
         localStorage.setItem("AUTH", JSON.stringify(json));
         setUserAuth(json);
-      });
+      })
+      .catch((err) => console.error(err));
   };
   const loginWithGoogle = async () => {
-    await signInWithPopup(firebaseAuth, provider).then((userCred) => {
-      loginHandler(userCred.user);
-    });
+    await signInWithPopup(firebaseAuth, provider)
+      .then((userCred) => {
+        loginHandler(userCred.user);
+      })
+      .catch((err) => console.error(err));
   };
   return (
     <Link
