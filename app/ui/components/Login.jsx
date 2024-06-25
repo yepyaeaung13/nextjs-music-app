@@ -8,7 +8,7 @@ const Login = ({ userAuth, setUserAuth }) => {
   const provider = new GoogleAuthProvider();
 
   const loginHandler = async (user) => {
-    await fetch("http://localhost:3000/api/user", {
+    await fetch("https://nextjs-music-app-w7op.vercel.app/api/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
