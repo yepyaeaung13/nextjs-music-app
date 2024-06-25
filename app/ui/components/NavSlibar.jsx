@@ -157,7 +157,7 @@ const NavSlibar = () => {
             userAuth == null ? "hidden" : "flex"
           }`}
           href={"#"}
-          title={userAuth == null ? "" : userAuth.email}
+          title={userAuth == null ? "" : userAuth[0].email}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +174,7 @@ const NavSlibar = () => {
             />
           </svg>
           <span className="line-clamp-1 w-2/3">
-            {userAuth == null ? "" : userAuth.name}
+            {userAuth == null ? "" : userAuth[0].name}
           </span>
         </Link>
         <Login userAuth={userAuth} setUserAuth={setUserAuth} />
