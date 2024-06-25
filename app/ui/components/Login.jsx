@@ -23,7 +23,6 @@ const Login = ({ userAuth, setUserAuth }) => {
       .then((json) => {
         localStorage.setItem("AUTH", JSON.stringify(json));
         setUserAuth(json);
-        location.pathname = "/";
       })
       .catch((err) => console.error(err));
   };
