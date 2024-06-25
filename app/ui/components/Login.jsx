@@ -23,6 +23,7 @@ const Login = ({ userAuth, setUserAuth }) => {
       .then((json) => {
         localStorage.setItem("AUTH", JSON.stringify(json[0]));
         setUserAuth(json[0]);
+        location.pathname = "/";
       });
   };
   const loginWithGoogle = async () => {
@@ -31,11 +32,10 @@ const Login = ({ userAuth, setUserAuth }) => {
     });
   };
   return (
-    <Link
+    <button
       className={`hover:bg-secondary mt-10 rounded-md p-1 duration-200 items-start gap-2 ${
         userAuth == null ? "flex" : "hidden"
       }`}
-      href={"#"}
       onClick={loginWithGoogle}
     >
       <svg
@@ -53,7 +53,7 @@ const Login = ({ userAuth, setUserAuth }) => {
         />
       </svg>
       <span>Login</span>
-    </Link>
+    </button>
   );
 };
 
