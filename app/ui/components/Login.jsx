@@ -35,7 +35,7 @@ const Login = ({ userAuth, setUserAuth }) => {
       className={`hover:bg-secondary mt-10 rounded-md p-1 duration-200 items-start gap-2 ${
         userAuth == null ? "flex" : "hidden"
       }`}
-      href={"/"}
+      href={"#"}
       onClick={loginWithGoogle}
     >
       <svg
