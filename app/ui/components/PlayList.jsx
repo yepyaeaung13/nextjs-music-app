@@ -1,18 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search from "./Search";
 import dynamic from "next/dynamic";
 
 const SongsCard = dynamic(() => import("./SongsCard"), { ssr: false });
 
-export default function PlayList({ playListSongs }) {
+export default function PlayList({ playList }) {
   const [filterByUser, setFilterByUser] = useState(() => {
     const localValue = localStorage.getItem("AUTH");
     if (localValue == null) {
       return [];
     } else {
       const auth = JSON.parse(localValue);
-      return playListSongs.filter((song) => song.user_id === auth[0].id);
+      return playList.filter((song) => song.user_id === auth[0].id);
     }
   });
   const [filterSongs, setFilterSongs] = useState(filterByUser);

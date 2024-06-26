@@ -1,9 +1,9 @@
 "use client";
-import store from "@/lib/store";
 import "./globals.css";
 import { Provider } from "react-redux";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
+import store from "@/lib/store";
 
 const NavSlibar = dynamic(() => import("./ui/components/NavSlibar"), {
   ssr: false,

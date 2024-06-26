@@ -25,7 +25,7 @@ const SongsCard = ({ filterSongs, song, idx }) => {
   };
 
   const likeSongHandler = (song) => {
-    fetch("https://nextjs-music-app-w7op.vercel.app/api/add-like-songs", {
+    fetch("http://localhost:3000/api/add-like-songs", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -35,7 +35,7 @@ const SongsCard = ({ filterSongs, song, idx }) => {
   };
 
   const playListSongHandler = (song) => {
-    fetch("https://nextjs-music-app-w7op.vercel.app/api/add-playlist-songs", {
+    fetch("http://localhost:3000/api/add-playlist-songs", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -108,7 +108,7 @@ const SongsCard = ({ filterSongs, song, idx }) => {
               onClick={() => {
                 likeSongHandler(song);
               }}
-              className="hover:text-green-500 w-full px-2 py-1 duration-200 text-sm flex items-center gap-2"
+              className="hover:text-green-500 active:scale-85 duration-300 w-full px-2 py-1 text-sm flex items-center gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +130,7 @@ const SongsCard = ({ filterSongs, song, idx }) => {
               onClick={() => {
                 playListSongHandler(song);
               }}
-              className="hover:text-green-500 w-full px-2 py-1 duration-200 text-sm flex items-center gap-2"
+              className="hover:text-green-500 active:scale-85 duration-300 w-full px-2 py-1 text-sm flex items-center gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

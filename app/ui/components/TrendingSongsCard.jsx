@@ -24,22 +24,22 @@ const TrendingSongsCard = ({ topTrendingSongs, song, idx }) => {
     );
   };
   const likeSongHandler = (song) => {
-    fetch("https://nextjs-music-app-w7op.vercel.app/api/add-like-songs", {
+    fetch("http://localhost:3000/api/add-like-songs", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({ song: song, userId: auth[0].id }),
-    });
+    }).catch((err) => console.error(err));
   };
   const playListSongHandler = (song) => {
-    fetch("https://nextjs-music-app-w7op.vercel.app/api/add-playlist-songs", {
+    fetch("http://localhost:3000/api/add-playlist-songs", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({ song: song, userId: auth[0].id }),
-    });
+    }).catch((err) => console.error(err));
   };
   return (
     <div
@@ -83,7 +83,9 @@ const TrendingSongsCard = ({ topTrendingSongs, song, idx }) => {
           onClick={() => {
             likeSongHandler(song);
           }}
-          className={`text-green-500 ${auth == null ? "hidden" : "block"}`}
+          className={`text-green-500 active:scale-85 duration-300 ${
+            auth == null ? "hidden" : "block"
+          }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +93,7 @@ const TrendingSongsCard = ({ topTrendingSongs, song, idx }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="size-6 pointer-events-none"
           >
             <path
               strokeLinecap="round"
@@ -105,7 +107,9 @@ const TrendingSongsCard = ({ topTrendingSongs, song, idx }) => {
             playListSongHandler(song);
           }}
           title="add play list"
-          className={`${auth == null ? "hidden" : "block"}`}
+          className={`active:scale-85 duration-300 ${
+            auth == null ? "hidden" : "block"
+          }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +117,7 @@ const TrendingSongsCard = ({ topTrendingSongs, song, idx }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="size-6 pointer-events-none"
           >
             <path
               strokeLinecap="round"

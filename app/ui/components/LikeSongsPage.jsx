@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Search from "./Search";
 import dynamic from "next/dynamic";
-import { usePathname, useRouter } from "next/navigation";
 
 const SongsCard = dynamic(() => import("./SongsCard"), { ssr: false });
 

@@ -7,10 +7,10 @@ const PlayList = dynamic(() => import("../ui/components/PlayList"), {
 });
 
 const page = async () => {
-  const playListSongs = await fetchPlayListSongs();
+  const playList = await fetchPlayListSongs();
   return (
     <div>
-      <PlayList playListSongs={playListSongs} />
+      <PlayList playList={playList} />
     </div>
   );
 };

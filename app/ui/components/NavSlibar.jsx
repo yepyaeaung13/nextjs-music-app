@@ -100,15 +100,13 @@ const NavSlibar = () => {
           </svg>
           Artists
         </Link>
-        <button
+        <Link
           className={`hover:bg-secondary rounded-md p-1 duration-200 items-center gap-2 ${
             pathname === "/like-songs"
               ? "bg-gradient-to-r from-secondary to-green-800"
               : ""
           } ${userAuth == null ? "hidden" : "flex"}`}
-          onClick={() => {
-            window.location.pathname = "like-songs";
-          }}
+          href={"/like-songs"}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -125,16 +123,14 @@ const NavSlibar = () => {
             />
           </svg>
           Like Songs
-        </button>
-        <button
+        </Link>
+        <Link
           className={`hover:bg-secondary rounded-md p-1 duration-200 items-center gap-2  ${
             pathname === "/play-lists"
               ? "bg-gradient-to-r from-secondary to-green-800"
               : ""
           }  ${userAuth == null ? "hidden" : "flex"}`}
-          onClick={() => {
-            location.pathname = "play-lists";
-          }}
+          href={"/play-lists"}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +147,7 @@ const NavSlibar = () => {
             />
           </svg>
           My Playlists
-        </button>
+        </Link>
         <Link
           className={`hover:bg-secondary mt-10 rounded-md p-1 duration-200 items-start gap-2 ${
             userAuth == null ? "hidden" : "flex"

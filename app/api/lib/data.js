@@ -103,8 +103,8 @@ export const addPlayListSongs = async (id, title, artist, src, userId) => {
 export const getLikeSongsById = async (id) => {
   try {
     const client = await db.connect();
-    const data = client.sql`SELECT * FROM likeSongs WHERE user_id=${id}`;
-    return (await data).rows;
+    const data = await client.sql`SELECT * FROM likeSongs WHERE user_id=${id}`;
+    return data.rows;
   } catch (error) {
     console.error(error);
   }
