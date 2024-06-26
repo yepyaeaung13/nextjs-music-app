@@ -1,8 +1,8 @@
 import { getLikeSongsById } from "../lib/data";
 
 export const GET = async (request) => {
+  const { searchParams } = new URL(request.url);
   try {
-    const { searchParams } = new URL(request.url);
     const userId = searchParams.get("id");
     const data = await getLikeSongsById(userId);
     return Response.json(data);
