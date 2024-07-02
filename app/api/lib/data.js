@@ -30,26 +30,6 @@ export const fetchSongs = async () => {
   }
 };
 
-export const fetchLikeSongs = async () => {
-  try {
-    const client = await db.connect();
-    const data = await client.sql`SELECT * FROM likeSongs`;
-    return data.rows;
-  } catch (error) {
-    console.error("failed to fetch songs", error);
-  }
-};
-
-export const fetchPlayListSongs = async () => {
-  try {
-    const client = await db.connect();
-    const data = await client.sql`SELECT * FROM playList`;
-    return data.rows;
-  } catch (error) {
-    console.error("failed to fetch songs", error);
-  }
-};
-
 export const login = async (email, password) => {
   try {
     const client = await db.connect();
@@ -115,6 +95,15 @@ export const getLikeSongsById = async (id) => {
   try {
     const client = await db.connect();
     const data = await client.sql`SELECT * FROM likeSongs WHERE user_id=${id}`;
+    return data.rows;
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const getPlayListById = async (id) => {
+  try {
+    const client = await db.connect();
+    const data = await client.sql`SELECT * FROM playList WHERE user_id=${id}`;
     return data.rows;
   } catch (error) {
     console.error(error);

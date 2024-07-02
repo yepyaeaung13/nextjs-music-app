@@ -5,18 +5,22 @@ import dynamic from "next/dynamic";
 
 const SongsCard = dynamic(() => import("./SongsCard"), { ssr: false });
 
-export default function PlayList({ likeSongs }) {
-  const [filterByUser, setFilterByUser] = useState(() => {
+export default function PlayList() {
+  const [auth, setAuth] = useState(() => {
     const localValue = localStorage.getItem("AUTH");
     if (localValue == null) {
       return [];
-    } else {
-      const auth = JSON.parse(localValue);
-      return likeSongs.filter((song) => song.user_id === auth.id);
     }
+    return JSON.parse(localValue);
   });
 
-  const [filterSongs, setFilterSongs] = useState(filterByUser);
+  const [filterSongs, setFilterSongs] = useState([]);
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/like-songs?id=${auth.id}`)
+      .then((res) => res.json())
+      .then((data) => setFilterSongs(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   const searchHandler = (e) => {
     const searchString = e.target.value.toLowerCase();
