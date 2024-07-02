@@ -24,21 +24,21 @@ const TrendingSongsCard = ({ topTrendingSongs, song, idx }) => {
     );
   };
   const likeSongHandler = (song) => {
-    fetch("http://localhost:3000/api/add-like-songs", {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/add-like-songs`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ song: song, userId: auth[0].id }),
+      body: JSON.stringify({ song: song, userId: auth.id }),
     }).catch((err) => console.error(err));
   };
   const playListSongHandler = (song) => {
-    fetch("http://localhost:3000/api/add-playlist-songs", {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/add-playlist-songs`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ song: song, userId: auth[0].id }),
+      body: JSON.stringify({ song: song, userId: auth.id }),
     }).catch((err) => console.error(err));
   };
   return (
@@ -83,7 +83,7 @@ const TrendingSongsCard = ({ topTrendingSongs, song, idx }) => {
           onClick={() => {
             likeSongHandler(song);
           }}
-          className={`text-green-500 active:scale-85 duration-300 ${
+          className={`text-green-500 active:scale-75 duration-300 ${
             auth == null ? "hidden" : "block"
           }`}
         >
@@ -107,7 +107,7 @@ const TrendingSongsCard = ({ topTrendingSongs, song, idx }) => {
             playListSongHandler(song);
           }}
           title="add play list"
-          className={`active:scale-85 duration-300 ${
+          className={`active:scale-75 duration-300 ${
             auth == null ? "hidden" : "block"
           }`}
         >

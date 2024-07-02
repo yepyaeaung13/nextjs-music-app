@@ -8,11 +8,7 @@ const LikeSongsPage = dynamic(() => import("../ui/components/LikeSongsPage"), {
 
 const page = async () => {
   const likeSongs = await fetchLikeSongs();
-  return (
-    <div>
-      <LikeSongsPage likeSongs={likeSongs} />
-    </div>
-  );
+  return <LikeSongsPage likeSongs={likeSongs} />;
 };
 
 export default page;

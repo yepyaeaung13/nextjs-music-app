@@ -2,9 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import dynamic from "next/dynamic";
-
-const Login = dynamic(() => import("./Login"), { ssr: false });
 
 const NavSlibar = () => {
   const pathname = usePathname();
@@ -23,11 +20,12 @@ const NavSlibar = () => {
 
   const logoutHandler = () => {
     setUserAuth(null);
+    location.pathname = "/";
   };
 
   return (
     <header>
-      <nav className="h-[100vh] flex flex-col bg-primary p-5 gap-5">
+      <nav className="flex flex-col bg-primary p-5 gap-5">
         <Link
           className={`hover:bg-secondary rounded-md p-1 duration-200 flex items-center gap-2 ${
             pathname === "/"
@@ -153,7 +151,7 @@ const NavSlibar = () => {
             userAuth == null ? "hidden" : "flex"
           }`}
           href={"#"}
-          title={userAuth == null ? "" : userAuth[0].email}
+          title={userAuth == null ? "" : userAuth.email}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -170,10 +168,32 @@ const NavSlibar = () => {
             />
           </svg>
           <span className="line-clamp-1 w-2/3">
-            {userAuth == null ? "" : userAuth[0].name}
+            {userAuth == null ? "" : userAuth.name}
           </span>
         </Link>
-        <Login userAuth={userAuth} setUserAuth={setUserAuth} />
+        {/* <Login userAuth={userAuth} setUserAuth={setUserAuth} /> */}
+        <Link
+          className={`hover:bg-secondary mt-10 rounded-md p-1 duration-200 items-start gap-2 ${
+            userAuth == null ? "flex" : "hidden"
+          }`}
+          href={"/login"}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 text-green-500"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+          <span>Login</span>
+        </Link>
         <Link
           className={`hover:bg-secondary rounded-md p-1 duration-200 items-center gap-2  ${
             userAuth == null ? "hidden" : "flex"

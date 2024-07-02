@@ -50,19 +50,30 @@ export const fetchPlayListSongs = async () => {
   }
 };
 
-export const postUser = async (uid, name, email) => {
+export const login = async (email, password) => {
   try {
     const client = await db.connect();
-    const checkUser = await client.sql`SELECT * FROM users WHERE id = ${uid}`;
-    if (checkUser.rows.length !== 0) {
-      return checkUser.rows;
+    const data = await client.sql`SELECT * FROM users WHERE email=${email}`;
+    return data.rows;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const createUser = async (id, name, email, password) => {
+  try {
+    const client = await db.connect();
+    const checkUser =
+      await client.sql`SELECT * FROM users WHERE email = ${email}`;
+    if (checkUser.rowCount == 0) {
+      const data =
+        await client.sql`INSERT INTO users (id, name, email, password) VALUES (${id}, ${name}, ${email}, ${password}) RETURNING *`;
+      return data.rows;
     } else {
-      const user =
-        await client.sql`INSERT INTO users (id, name, email) VALUES (${uid}, ${name}, ${email})`;
-      return user.rows;
+      return null;
     }
   } catch (error) {
-    console.error("failt to post user ", error);
+    console.error("failed to post user ", error);
   }
 };
 
@@ -105,6 +116,24 @@ export const getLikeSongsById = async (id) => {
     const client = await db.connect();
     const data = await client.sql`SELECT * FROM likeSongs WHERE user_id=${id}`;
     return data.rows;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deletePlayListSongById = async (id) => {
+  try {
+    const client = await db.connect();
+    const data = await client.sql`DELETE FROM playList WHERE id=${id}`;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteLikeSongById = async (id) => {
+  try {
+    const client = await db.connect();
+    const data = await client.sql`DELETE FROM likeSongs WHERE id=${id}`;
   } catch (error) {
     console.error(error);
   }

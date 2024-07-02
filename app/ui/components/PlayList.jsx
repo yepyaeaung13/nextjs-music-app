@@ -12,7 +12,7 @@ export default function PlayList({ playList }) {
       return [];
     } else {
       const auth = JSON.parse(localValue);
-      return playList.filter((song) => song.user_id === auth[0].id);
+      return playList.filter((song) => song.user_id === auth.id);
     }
   });
   const [filterSongs, setFilterSongs] = useState(filterByUser);
@@ -27,17 +27,37 @@ export default function PlayList({ playList }) {
       );
     });
   };
+
+  const removeSongsHandler = (id) => {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/delete-playlist-songs`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ id: id }),
+    })
+      .then((data) => data.json())
+      .then((json) => {
+        if (json.delete == true) {
+          setFilterSongs((currentSongs) => {
+            return currentSongs.filter((song) => song.id !== id);
+          });
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
-    <div className="h-[100vh] bg-secondary px-10 py-5 grid grid-rows-12 gap-2">
-      <div className="row-span-1 grid grid-cols-12 px-2 gap-2">
-        <h2 className="col-span-6 bg-gradient-to-r from-green-800 to-palette_one rounded-md flex justify-center items-center">
+    <div className="h-[100vh] bg-secondary md:px-10 px-2 md:py-5 py-2 grid grid-rows-12">
+      <div className="md:row-span-1 grid md:grid-cols-12 grid-cols-1 px-2 gap-2">
+        <h2 className="md:col-span-6 bg-gradient-to-r from-green-800 to-palette_one rounded-md flex justify-center items-center">
           <span className="text-xl">My Play Lists</span>
         </h2>
-        <div className="col-span-6 flex justify-center items-center">
+        <div className="md:col-span-6 flex justify-center items-center">
           <Search searchHandler={searchHandler} />
         </div>
       </div>
-      <div className="row-span-11 all-songs grid grid-cols-12 gap-2 h-[75vh] px-2 py-2 overflow-y-scroll scrollbar">
+      <div className="md:row-span-11 all-songs grid md:grid-cols-12 grid-cols-1 gap-2 h-[75vh] px-2 py-2 overflow-y-scroll scrollbar pt-5">
         {filterSongs.map((song, idx) => {
           return (
             <SongsCard
@@ -45,6 +65,7 @@ export default function PlayList({ playList }) {
               filterSongs={filterSongs}
               song={song}
               idx={idx}
+              removeSongsHandler={removeSongsHandler}
             />
           );
         })}

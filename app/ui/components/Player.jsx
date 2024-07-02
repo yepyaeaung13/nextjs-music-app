@@ -100,10 +100,10 @@ const Player = () => {
   };
   return (
     <div
-      className={`fixed w-full left-0 bottom-0 grid grid-cols-12 gap-5 items-center rounded-tl-full rounded-tr-full shadow-2xl border-t border-green-700 bg-primary px-52 py-5`}
+      className={`fixed w-full left-0 bottom-0 grid grid-cols-12 justify-center md:gap-5 gap-2 items-center md:rounded-tl-full rounded-tl-md md:rounded-tr-full rounded-tr-md shadow-2xl border-t border-green-700 bg-primary md:px-52 px-1 md:py-5 py-3`}
     >
-      <div className="col-span-4">
-        <span className="line-clamp-1 gap-1 text-nowrap">
+      <div className="md:col-span-4 col-span-5 text-palette_four text-center">
+        <span className="line-clamp-1 md:text-sm text-xs gap-1 text-nowrap">
           {player.id == null ? (
             ""
           ) : (
@@ -139,8 +139,8 @@ const Player = () => {
           loop={loop}
         ></audio>
       </div>
-      <div className="col-span-8 flex gap-10">
-        <div className="flex justify-center gap-5">
+      <div className="md:col-span-8 col-span-7 flex flex-row justify-center md:gap-10 gap-2">
+        <div className="flex justify-center md:gap-5 gap-3">
           {loop == false ? (
             <button onClick={loopHandler}>
               <svg
@@ -188,7 +188,7 @@ const Player = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6"
+                className="size-6 text-palette_four"
               >
                 <path
                   strokeLinecap="round"
@@ -205,7 +205,7 @@ const Player = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6"
+                className="size-6 text-palette_four"
               >
                 <path
                   strokeLinecap="round"
@@ -232,16 +232,16 @@ const Player = () => {
             </svg>
           </button>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="progressbar h-1 w-[160px] bg-palette_three">
+        <div className="flex justify-center items-center gap-2">
+          <div className="progressbar md:block hidden h-1 w-[160px] bg-palette_three">
             <div className="current-progress h-1 w-[0px] bg-green-500"></div>
           </div>
-          <span className="text-nowrap">
+          <span className="text-nowrap text-palette_four">
             <span className="text-nowrap text-xs song-currentTime">0:00</span>
             {" / "}
             <span className="text-nowrap text-xs song-duration">0:00</span>
           </span>
-          <button className="text-green-500 ms-5">
+          <button className="text-green-500 ms-5 md:block hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -265,7 +265,7 @@ const Player = () => {
             min={0}
             max={1}
             step={0.1}
-            className="w-32 h-1 rounded-lg focus:outline-none bg-green-700 appearance-none cursor-pointer [&::-webkit-slider-thumb]:w-2.5
+            className="w-32 md:block hidden h-1 rounded-lg focus:outline-none bg-green-700 appearance-none cursor-pointer [&::-webkit-slider-thumb]:w-2.5
             [&::-webkit-slider-thumb]:h-2.5
             [&::-webkit-slider-thumb]:-mt-0.5
             [&::-webkit-slider-thumb]:appearance-none

@@ -12,7 +12,7 @@ export default async function page() {
   const playListSongs = await fetchPlayListSongs();
 
   return (
-    <div className="h-[100vh] bg-secondary px-10 py-5">
+    <div className="h-[100vh] bg-secondary md:px-10 px-2 py-5">
       <SongsPage
         songs={songs}
         likeSongs={likeSongs}

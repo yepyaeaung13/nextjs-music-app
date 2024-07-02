@@ -27,15 +27,15 @@ const ArtistSongsPage = ({ songs }) => {
   };
   return (
     <>
-      <div className="row-span-2 grid grid-cols-12 px-2 gap-2">
-        <h2 className="col-span-6 bg-gradient-to-r from-green-800 to-palette_one rounded-md flex justify-center items-center">
+      <div className="row-span-2 flex flex-col-reverse md:grid grid-cols-12 px-2 gap-2">
+        <h2 className="md:col-span-6 bg-gradient-to-r from-green-800 to-palette_one rounded-md flex justify-center items-center">
           <span className="text-xl">{artistName}</span>
         </h2>
-        <div className="col-span-6 flex justify-center items-center">
+        <div className="md:col-span-6 flex justify-center items-center">
           <Search searchHandler={searchHandler} />
         </div>
       </div>
-      <div className="artist-songs row-span-9 grid grid-cols-12 px-2 gap-3 overflow-y-scroll scrollbar">
+      <div className="artist-songs row-span-9 grid md:grid-cols-12 grid-cols-1 px-2 gap-3 overflow-y-scroll scrollbar">
         {filterSongs.map((song, idx) => {
           return (
             <SongsCard

@@ -20,7 +20,7 @@ const SongsPage = ({ songs }) => {
       <div className="flex justify-center mb-8">
         <Search searchHandler={searchHandler} />
       </div>
-      <div className="all-songs grid grid-cols-12 gap-2 h-[75vh] px-2 overflow-y-scroll scrollbar">
+      <div className="all-songs grid md:grid-cols-12 grid-cols-1 gap-2 md:h-[75vh] h-[80vh] px-2 overflow-y-scroll scrollbar">
         {filterSongs.map((song, idx) => {
           return (
             <SongsCard

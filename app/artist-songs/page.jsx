@@ -7,7 +7,7 @@ export default async function page() {
   const songs = await fetchSongs();
   return (
     <div className="h-[100vh] w-full flex justify-center bg-secondary relative">
-      <Link href={"/artists"} className="absolute top-6 left-4">
+      <Link href={"/artists"} className="absolute md:top-6 top-4 left-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -23,7 +23,7 @@ export default async function page() {
           />
         </svg>
       </Link>
-      <dir className="w-screen grid grid-rows-12 gap-2 px-10">
+      <dir className="w-full grid grid-rows-12 gap-2 md:px-10 px-2 md:mt-2 -mt-6">
         <ArtistSongsPage songs={songs} />
       </dir>
     </div>

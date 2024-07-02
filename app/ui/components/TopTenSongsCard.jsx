@@ -25,22 +25,22 @@ const TopTenSongsCard = ({ songs, song, idx }) => {
   };
 
   const likeSongHandler = async (song) => {
-    fetch("http://localhost:3000/api/add-like-songs", {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/add-like-songs`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ song: song, userId: auth[0].id }),
+      body: JSON.stringify({ song: song, userId: auth.id }),
     }).catch((err) => console.error(err));
   };
 
   const playListSongHandler = (song) => {
-    fetch("http://localhost:3000/api/add-playlist-songs", {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/add-playlist-songs`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ song: song, userId: auth[0].id }),
+      body: JSON.stringify({ song: song, userId: auth.id }),
     }).catch((err) => console.error(err));
   };
   return (
@@ -82,7 +82,7 @@ const TopTenSongsCard = ({ songs, song, idx }) => {
       </div>
 
       <div
-        className={`col-span-1 text-center ${
+        className={`col-span-1 text-center flex items-center ${
           auth == null ? "hidden" : "block"
         }`}
       >
@@ -90,7 +90,7 @@ const TopTenSongsCard = ({ songs, song, idx }) => {
           onClick={() => {
             likeSongHandler(song);
           }}
-          className="text-green-500 active:scale-85 duration-300"
+          className="text-green-500 active:scale-75 duration-300"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@ const TopTenSongsCard = ({ songs, song, idx }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="md:size-6 size-5"
           >
             <path
               strokeLinecap="round"
@@ -133,7 +133,7 @@ const TopTenSongsCard = ({ songs, song, idx }) => {
               onClick={() => {
                 playListSongHandler(song);
               }}
-              className="hover:text-green-500 active:scale-85 duration-300 w-full px-2 py-1 text-sm flex items-center gap-2"
+              className="hover:text-green-500 active:scale-75 duration-300 w-full px-2 py-1 text-sm flex items-center gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

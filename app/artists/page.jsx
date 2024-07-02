@@ -27,17 +27,17 @@ export default function page() {
   };
 
   return (
-    <div className="h-[100vh] bg-secondary px-10 py-5">
+    <div className="h-[100vh] bg-secondary md:px-10 px-2 py-5">
       <div className="flex justify-center mb-8">
         <Search searchHandler={searchHandler} />
       </div>
-      <div className="grid grid-cols-12 gap-5 h-[75vh] px-6 overflow-y-scroll scrollbar">
+      <div className="grid md:grid-cols-12 grid-cols-1 md:gap-5 gap-2 h-[75vh] px-6 overflow-y-scroll scrollbar">
         {artistFilter.map((artist) => {
           return (
             <Link
               href={`/artist-songs?name=${artist.artistName}`}
               key={artist.id}
-              className="col-span-4 bg-gradient-to-r from-green-800 to-palette_one h-40 rounded-lg flex items-end p-5"
+              className="md:col-span-4 bg-gradient-to-r from-green-800 to-palette_one md:h-40 h-24 rounded-lg flex items-end p-5"
             >
               <span>{artist.artistName}</span>
             </Link>
