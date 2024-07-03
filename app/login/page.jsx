@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-// import bcrypt from "bcrypt";
 
 const page = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -17,7 +16,6 @@ const page = () => {
     const form = new FormData(e.target);
     const email = form.get("email");
     const password = form.get("password");
-    // const hashPassword = bcrypt.hash(password, 10);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/user-login`,
@@ -53,7 +51,6 @@ const page = () => {
     const password = form.get("password");
     const confirmPassword = form.get("confirm_password");
     if (password === confirmPassword) {
-      // const hashPassword = bcrypt.hash(password, 10);
       if (
         password.match(
           /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/

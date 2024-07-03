@@ -30,7 +30,7 @@ export const fetchSongs = async () => {
   }
 };
 
-export const login = async (email, password) => {
+export const login = async (email) => {
   try {
     const client = await db.connect();
     const data = await client.sql`SELECT * FROM users WHERE email=${email}`;

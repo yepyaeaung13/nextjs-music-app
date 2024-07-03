@@ -24,8 +24,8 @@ const NavSlibar = () => {
   };
 
   return (
-    <header>
-      <nav className="flex flex-col bg-primary p-5 gap-5">
+    <header className="bg-primary">
+      <nav className="flex flex-col p-5 gap-5">
         <Link
           className={`hover:bg-secondary rounded-md p-1 duration-200 flex items-center gap-2 ${
             pathname === "/"
@@ -218,6 +218,11 @@ const NavSlibar = () => {
           logout
         </Link>
       </nav>
+      <div className="p-5">
+        <span className="text-xs">
+          © 2024 - Ye Pyae Aung, All rights reserved
+        </span>
+      </div>
     </header>
   );
 };
